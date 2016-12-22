@@ -1,0 +1,17 @@
+version: '2'
+services:
+  twitter:
+    build: .
+    volumes:
+      - .:/code
+    depends_on:
+      - elasticsearch
+    external_links:
+      - elasticsearch
+  elasticsearch:
+    build: elasticsearch/
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
